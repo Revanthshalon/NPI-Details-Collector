@@ -118,7 +118,7 @@ namespace NPI_Details_Collector
             float i = 1.0f;
             float divi = details.Count / 100.0f;
             var client = API.GetHCPDetails();
-            Parallel.ForEach(details, new ParallelOptions() { MaxDegreeOfParallelism = 3 }, async index =>
+            Parallel.ForEach(details, new ParallelOptions() { MaxDegreeOfParallelism = 5 }, async index =>
             {
                 i = (i + 1) / divi;
                 var response = await client.GetAsync(@$"?number={index.NPI.ToString()}&version=2.1");
