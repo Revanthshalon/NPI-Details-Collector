@@ -15,4 +15,14 @@ namespace NPI_Details_Collector.Model
         public string? Status { get; set; }
         public string? Taxonomy { get; set; }
     }
+    internal class CSVWriterAddressDTO
+    {
+        public long UWID { get; set; }
+        public long NPI { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Status { get; set; }
+        public string? Taxonomy { get; set; }
+    }
+}
 }
