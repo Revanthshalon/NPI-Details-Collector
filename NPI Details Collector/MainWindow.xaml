@@ -1,0 +1,82 @@
+﻿<Window x:Class="NPI_Details_Collector.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NPI_Details_Collector"
+        mc:Ignorable="d"
+        Title="NPI Details Collector V0.0" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Load CSV" Click="LoadCSV_Click"/>
+                <MenuItem Header="_Exit" Click="MenuExit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem Header="_Help" />
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="100px" MaxWidth="200px"/>
+                <ColumnDefinition MaxWidth="800px" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50px"/>
+                    <RowDefinition Height="90px"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Background="AliceBlue">
+                    <StackPanel Orientation="Horizontal" MinWidth="120px">
+                        <Button HorizontalAlignment="Left" MinWidth="120px" MaxWidth="120px" MinHeight="20px" MaxHeight="30px" Content="Load CSV" Margin="10px 0px 0px 0px" Click="LoadCSV_Click">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <TextBlock FontSize="10px" VerticalAlignment="Center" Margin="5px 0px 0px 0px">                                
+                            <Hyperlink Click="SampleCSV_Click">Sample CSV</Hyperlink>           
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Border Background="AliceBlue" Grid.Row="1" >
+                    <StackPanel Orientation="Vertical" Grid.Column="0">
+                        <Label Background="Aquamarine" Content="Details" ToolTip="Data to be retrieved" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <CheckBox x:Name="Basic" Content="Basic Information" Margin="10px 5px 10px 5px" IsChecked="True" Checked="BasicInfoChecked" Unchecked="BasicInfoUnChecked"/>
+                        <CheckBox x:Name="Address" Content="Address Details" Margin="10px 0px 10px 5px" Checked="AddressInfoChecked" Unchecked="AddressInfoUnChecked"/>
+                        <CheckBox x:Name="Taxonomy" Content="Taxonomy Details" Margin="10px 0px 10px 5px" IsChecked="True" Checked="TaxonomyInfoChecked" Unchecked="TaxonomyInfoUnChecked"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="AliceBlue" Grid.Row="3">
+                    <StackPanel Orientation="Vertical" Margin="10px" VerticalAlignment="Center">
+                        <Button HorizontalAlignment="Center" MinWidth="120px" MaxWidth="120px" MinHeight="20px" MaxHeight="30px" Click="GetUserDetail_Click" Content="Get User Details" Margin="10px 10px 0px 5px">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <ProgressBar MinWidth="120px" MaxWidth="120px" MinHeight="20px" MaxHeight="30px" Margin="10px 10px 0px 5px" ></ProgressBar>
+                        <Button Click="ExportCSV_Click" HorizontalAlignment="Center" MinWidth="120px" MaxWidth="120px" MinHeight="20px" MaxHeight="30px" Content="Export User Details" Margin="10px 10px 0px 5px">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <ListView Grid.Column="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="UserWave ID" Width="80px"/>
+                        <GridViewColumn Header="NPI" Width="80px"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </DockPanel>
+</Window>
