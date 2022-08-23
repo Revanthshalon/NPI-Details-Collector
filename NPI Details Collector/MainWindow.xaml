@@ -58,7 +58,7 @@
                                 </Style>
                             </Button.Resources>
                         </Button>
-                        <ProgressBar MinWidth="120px" MaxWidth="120px" MinHeight="20px" MaxHeight="30px" Margin="10px 10px 0px 5px" ></ProgressBar>
+                        <ProgressBar x:Name="ProgressLevel" MinWidth="120px" MaxWidth="120px" MinHeight="20px" MaxHeight="30px" Margin="10px 10px 0px 5px" Minimum="0" Maximum="100" ></ProgressBar>
                         <Button Click="ExportCSV_Click" HorizontalAlignment="Center" MinWidth="120px" MaxWidth="120px" MinHeight="20px" MaxHeight="30px" Content="Export User Details" Margin="10px 10px 0px 5px">
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -69,11 +69,11 @@
                     </StackPanel>
                 </Border>
             </Grid>
-            <ListView Grid.Column="1">
+            <ListView x:Name="ListViewNPI" Grid.Column="1">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="UserWave ID" Width="80px"/>
-                        <GridViewColumn Header="NPI" Width="80px"/>
+                        <GridViewColumn Header="UserWave ID" Width="80px" DisplayMemberBinding="{Binding Path=UserWaveID}"/>
+                        <GridViewColumn Header="NPI" Width="80px" DisplayMemberBinding="{Binding Path=NPI}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
