@@ -59,6 +59,8 @@ namespace NPI_Details_Collector.Model
         public string State { get; set; } = string.Empty;
         [JsonProperty("postal_code")]
         public long PostalCode { get; set; }
+        [JsonProperty("telephone_number")]
+        public string Contact { get; set; } = string.Empty;
     }
     class Taxonomy
     {

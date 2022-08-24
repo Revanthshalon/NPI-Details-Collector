@@ -99,6 +99,7 @@ namespace NPI_Details_Collector
                     City = addressDetails.City,
                     State = addressDetails.State,
                     PostalCode = addressDetails.PostalCode,
+                    Contact = addressDetails.Contact,
                     Taxonomy = taxonomyDetails
                 };
                 this.Dispatcher.Invoke(() =>
