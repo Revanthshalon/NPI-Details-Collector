@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Formats.Asn1;
 using System.Globalization;
 using CsvHelper;
+using System.Diagnostics;
 
 namespace NPI_Details_Collector
 {
@@ -22,7 +23,6 @@ namespace NPI_Details_Collector
         private List<HCPDetailsDTO> hcpDetails = new();
         private bool AddressStatus = false;
         private bool TaxonomyStatus = false;
-        private bool BasicStatus = true;
         private List<CSVWriterDTO> responses = new();
 
         public MainWindow()
@@ -56,25 +56,33 @@ namespace NPI_Details_Collector
         private void ExportCSV_Click(object sender, RoutedEventArgs e)
         {
 
+            responses.Clear();
             float divi = details.Count / 100.0f;
 
             foreach(var hcp in hcpDetails)
             {
                 string taxonomyDetails = String.Empty;
                 Address addressDetails = new Address();
-                foreach (var taxonomy in hcp.HCPDetails[0].Taxonomies)
+
+                if (TaxonomyStatus)
                 {
-                    if (taxonomy.Primary)
+                    foreach (var taxonomy in hcp.HCPDetails[0].Taxonomies)
                     {
-                        taxonomyDetails = taxonomy.Description;
+                        if (taxonomy.Primary)
+                        {
+                            taxonomyDetails = taxonomy.Description;
+                        }
                     }
                 }
 
-                foreach (var address in hcp.HCPDetails[0].Addresses)
+                if (AddressStatus)
                 {
-                    if (address.AddressPurpose == "LOCATION")
+                    foreach (var address in hcp.HCPDetails[0].Addresses)
                     {
-                        addressDetails = address;
+                        if (address.AddressPurpose == "LOCATION")
+                        {
+                            addressDetails = address;
+                        }
                     }
                 }
 
@@ -114,10 +122,12 @@ namespace NPI_Details_Collector
         }
         private void GetUserDetail_Click(object sender, RoutedEventArgs e)
         {
+            Stopwatch timer = new Stopwatch();
             hcpDetails.Clear();
             float i = 1.0f;
             float divi = details.Count / 100.0f;
             var client = API.GetHCPDetails();
+            timer.Start();
             Parallel.ForEach(details, new ParallelOptions() { MaxDegreeOfParallelism = 5 }, async index =>
             {
                 i = (i + 1) / divi;
@@ -137,18 +147,11 @@ namespace NPI_Details_Collector
                     });
                     if (details.Count == hcpDetails.Count)
                     {
-                        MessageBox.Show("Data Import Completed", "Success");
+                        timer.Stop();
+                        MessageBox.Show($"Data Import Completed in {timer.ElapsedMilliseconds}", "Success");
                     }
                 }
             });
-        }
-        private void BasicInfoChecked(object sender, RoutedEventArgs e)
-        {
-            BasicStatus = true;
-        }
-        private void BasicInfoUnChecked(object sender, RoutedEventArgs e)
-        {
-            BasicStatus = false;
         }
         private void AddressInfoChecked(object sender, RoutedEventArgs e)
         {
