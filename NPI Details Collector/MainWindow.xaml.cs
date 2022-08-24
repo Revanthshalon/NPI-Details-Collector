@@ -122,12 +122,10 @@ namespace NPI_Details_Collector
         }
         private void GetUserDetail_Click(object sender, RoutedEventArgs e)
         {
-            Stopwatch timer = new Stopwatch();
             hcpDetails.Clear();
             float i = 1.0f;
             float divi = details.Count / 100.0f;
             var client = API.GetHCPDetails();
-            timer.Start();
             Parallel.ForEach(details, new ParallelOptions() { MaxDegreeOfParallelism = 5 }, async index =>
             {
                 i = (i + 1) / divi;
@@ -147,8 +145,7 @@ namespace NPI_Details_Collector
                     });
                     if (details.Count == hcpDetails.Count)
                     {
-                        timer.Stop();
-                        MessageBox.Show($"Data Import Completed in {timer.ElapsedMilliseconds}", "Success");
+                        MessageBox.Show($"Data Import Completed", "Success");
                     }
                 }
             });
