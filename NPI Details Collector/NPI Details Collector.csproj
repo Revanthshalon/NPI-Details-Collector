@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="resources\" />
+    <None Update="Resources\Sample Upload File.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

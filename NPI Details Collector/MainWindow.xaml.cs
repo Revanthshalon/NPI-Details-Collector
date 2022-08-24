@@ -51,8 +51,15 @@ namespace NPI_Details_Collector
         
         private void SampleCSV_Click(object sender, RoutedEventArgs e)
         {
-            File.Copy(@"Sample Upload File.csv", @$"{Environment.GetEnvironmentVariable("USERPROFILE")}\Downloads\Sample File.csv");
-            MessageBox.Show($"Sample File can be found in Downloads");
+            try
+            {
+                File.Copy($@"{Environment.CurrentDirectory}\Resources\Sample Upload File.csv", @$"{Environment.GetEnvironmentVariable("USERPROFILE")}\Downloads\Sample File.csv");
+                MessageBox.Show($"Sample File can be found in Downloads");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void ExportCSV_Click(object sender, RoutedEventArgs e)
         {
@@ -110,7 +117,6 @@ namespace NPI_Details_Collector
                 responses.Add(hcpDetail);
                 if(responses.Count == hcpDetails.Count)
                 {
-
                     using (var writer = new StreamWriter(@$"{Environment.GetEnvironmentVariable("USERPROFILE")}\Downloads\HCPDetails.csv"))
                     {
                         using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
