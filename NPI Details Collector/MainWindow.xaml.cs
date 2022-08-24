@@ -51,7 +51,8 @@ namespace NPI_Details_Collector
         
         private void SampleCSV_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($@"SampleCSV_Click");
+            File.Copy(@"Sample Upload File.csv", @$"{Environment.GetEnvironmentVariable("USERPROFILE")}\Downloads\Sample File.csv");
+            MessageBox.Show($"Sample File can be found in Downloads");
         }
         private void ExportCSV_Click(object sender, RoutedEventArgs e)
         {
