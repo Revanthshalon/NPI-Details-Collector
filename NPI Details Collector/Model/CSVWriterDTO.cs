@@ -14,7 +14,7 @@ namespace NPI_Details_Collector.Model
             public string? LastName { get; set; }
             public DateTime CertificateLastUpdatedDate { get; set; }
             public string? Status { get; set; }
-            public string? HouseAddress { get; set; }
+            public string? PracticeAddress { get; set; }
             public string? StreetAddress { get; set; }
             public string? City { get; set; }
             public string? State { get; set; }

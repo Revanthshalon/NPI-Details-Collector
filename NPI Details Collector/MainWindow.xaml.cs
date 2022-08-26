@@ -102,7 +102,7 @@ namespace NPI_Details_Collector
                     LastName = hcp.HCPDetails[0].UserDetails.LastName,
                     CertificateLastUpdatedDate = hcp.HCPDetails[0].UserDetails.CertificationDate,
                     Status = hcp.HCPDetails[0].UserDetails.Status == "A" ? "Active" : "InActive",
-                    HouseAddress = addressDetails.HouseAddress,
+                    PracticeAddress = addressDetails.HouseAddress,
                     StreetAddress = addressDetails.StreetAddress,
                     City = addressDetails.City,
                     State = addressDetails.State,
